@@ -1,0 +1,77 @@
+<mvc:View controllerName="r10worklist.controller.Worklist"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.f.semantic">
+
+    <semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+
+        <semantic:titleHeading>
+            <Title id="idWlTitle" text="{i18n>worklistTitle}" level="H2"/>
+        </semantic:titleHeading>
+
+        <semantic:content>
+            <Table id="table" width="auto" items="{
+                    path: '/productsSet',
+                    sorter: {
+                        path: 'Prdid',
+                        descending: false
+                    }
+                }" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished">
+
+                <headerToolbar>
+                    <OverflowToolbar id="idWlTBar">
+                        <Title id="tableHeader" text="{worklistView>/worklistTableTitle}" level="H3"/>
+                        <ToolbarSpacer id="idWlTSpacer"/>
+                        <SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" search=".onSearch">
+                            <layoutData>
+                                <OverflowToolbarLayoutData id="idWlLayData" maxWidth="200px" priority="NeverOverflow"/>
+                            </layoutData>
+                        </SearchField>
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column id="nameColumn">
+                        <Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+                    </Column>
+                    <Column id="idColumn">
+                        <Text text="{i18n>tableidColumnTitle}" id="idnameTitle"/>
+                    </Column>
+                    <Column id="descColumn">
+                        <Text text="{i18n>tabledescColumnTitle}" id="descColumnTitle"/>
+                    </Column>
+                    <Column id="unitNumberColumn" hAlign="End">
+                        <Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
+                    </Column>
+                    <Column id="stsColumn">
+                        <Text text="{i18n>tablestsColumnTitle}" id="stsColumnTitle"/>
+                    </Column>
+                    <Column id="stsCodeColumn">
+                        <Text text="{i18n>tablestscodeColumnTitle}" id="stsCodeColumnTitle"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="idWlColList" type="Navigation" press=".onPress">
+                        <cells>
+                            <ObjectIdentifier id="idObj0" title="{Prdid}"/>
+                            <ObjectIdentifier id="idObj1" text="{Prdname}"></ObjectIdentifier>
+                            <ObjectIdentifier id="idObj2" text="{Prddesc}"/>
+                            <ObjectNumber id="idObj3" number="{
+                                    path: 'Prdprice',
+                                    formatter: '.formatter.numberUnit'
+                                }" unit="{Currcode}" />
+                            <ObjectStatus id="idObj4" text="{Status}"></ObjectStatus>
+                            <ObjectStatus id="idObj5" text="{statusCode}"></ObjectStatus>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </semantic:content>
+
+        <semantic:sendEmailAction>
+            <semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+        </semantic:sendEmailAction>
+
+    </semantic:SemanticPage>
+
+</mvc:View>

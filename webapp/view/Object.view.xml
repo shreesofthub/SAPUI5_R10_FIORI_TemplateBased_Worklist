@@ -1,0 +1,97 @@
+<mvc:View xmlns:form="sap.ui.layout.form" controllerName="r10worklist.controller.Object"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.f.semantic">
+
+    <semantic:SemanticPage id="page" showFooter="true" headerPinnable="false" toggleHeaderOnTitleClick="false" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}">
+        <semantic:titleHeading>
+            <Title id="idObjTitle" text="{Prdname}" level="H3"/>
+        </semantic:titleHeading>
+        <semantic:headerContent>
+            <ObjectNumber id="idObjPrice" number="{
+                    path: 'Prdprice',
+                    formatter: '.formatter.numberUnit'
+                }" unit="{Currcode}" textAlign="Right"/>
+            <ObjectAttribute id="idObjId" title="Product ID" text="{Prdid}"></ObjectAttribute>
+            <ObjectAttribute id="idObjDesc" title="Product Description" text="{Prddesc}"></ObjectAttribute>
+        </semantic:headerContent>
+        <semantic:sendEmailAction>
+            <semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+        </semantic:sendEmailAction>
+        <IconTabBar id="idObjIconTab">
+            <items>
+                <IconTabFilter id="idObjTabFInfo" icon="sap-icon://information">
+                    <form:SimpleForm id="idObjSF" title="Product Information" layout="ResponsiveGridLayout">
+                        <Label id="idObjLbl1" text="Product ID"/>
+                        <Text id="idObjTxt1" text="{Prdid}"/>
+                        <Label id="idObjLbl2" text="Product Name"/>
+                        <Text id="idObjTxt2" text="{Prdname}"/>
+                        <Label id="idObjLbl3" text="Description"/>
+                        <Text id="idObjTxt3" text="{Prddesc}"/>
+                        <Label id="idObjLbl4" text="Price"/>
+                        <Text id="idObjTxt4" text="{Prdprice}"/>
+                        <Label id="idObjLbl5" text="Currency"/>
+                        <Text id="idObjTxt5" text="{Currcode}"/>
+                        <Label id="idObjLbl6" text="Status"/>
+                        <Text id="idObjTxt6" text="{Status}"/>
+                        <Label id="idObjLbl7" text="Status Code"/>
+                        <Text id="idObjTxt7" text="{statusCode}"/>
+                    </form:SimpleForm>
+                </IconTabFilter>
+                <IconTabFilter id="idObjTabFSupl" icon="sap-icon://supplier">
+                    <Table id="idObjTableSuppl" items="{toSuppliers}" headerText="Suppliers Details">
+                        <columns>
+                            <Column id="idCol1">
+                                <Title id="idObjTxt8" text="Supplier ID"></Title>
+                            </Column>
+                            <Column id="idCol2">
+                                <Title id="idObjTxt9" text="Supplier Name"></Title>
+                            </Column>
+                            <Column id="idCol3">
+                                <Title id="idObjTxt10" text="Location"></Title>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem id="idObjColList">
+                                <Text id="idObjtxt11" text="{Supid}"></Text>
+                                <Text id="idObjtxt12" text="{Supname}"></Text>
+                                <Text id="idObjtxt13" text="{Suploc}"></Text>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </IconTabFilter>
+                <IconTabFilter id="idObjTabAtt" icon="sap-icon://attachment">
+                    <Table id="idObjTabAttach" headerText="Product Attachments" items="{}">
+                        <columns>
+                            <Column id="idCol4">
+                                <Title id="idObjTxt11" text="File Name"></Title>
+                            </Column>
+                            <Column id="idCol5">
+                                <Title id="idObjTxt12" text="File type"></Title>
+                            </Column>
+                            <Column id="idCol6">
+                                <Title id="idObjTxt13" text="Download"></Title>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem id="idObjSuppList">
+                                <cells>
+                                    <Text id="idObjTxt14" text="{Filename}"/>
+                                    <Text id="idObjTxt15" text="{Filetype}"/>
+                                    <Button id="idBtn1" icon="sap-icon://download" press="onFileDownload"></Button>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </IconTabFilter>
+            </items>
+        </IconTabBar>
+        <semantic:positiveAction >
+            <semantic:PositiveAction id="idPositive" text="Approve" press="onApprovReject"/>
+        </semantic:positiveAction>
+        <semantic:negativeAction>
+            <semantic:NegativeAction id="idNegative" text="Reject" press="onApprovReject"></semantic:NegativeAction>
+        </semantic:negativeAction>
+    </semantic:SemanticPage>
+
+</mvc:View>
